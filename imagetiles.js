@@ -22,11 +22,11 @@
 		var currentRow = 1;
 		var lastContainerWidth = container.width();	
 
-		$('#' + container.attr("id") + " img").each(function(){
-			if($(this).parent().get(0).tagName != 'A'){			
+		$('#' + container.attr("id") + " img").each(function() {
+			if($(this).parent().get(0).tagName != 'A') {
 				$(this).wrap('<a/>');
 			}			
-			if(left >= containerWidth){
+			if(left >= containerWidth) {
 				currentRowIndex = 0;
 				left = 0;
 				top = top + args.imageWidth;
@@ -38,9 +38,9 @@
 			totalImagesCounter++;
 			$(this).parent().css({'display' : 'inline-block', 'position' : 'absolute'});
 		
-			if(currentRowIndex == 0){
+			if(currentRowIndex == 0) {
 				$(this).parent().css({ left: left + 'px' });
-			}else{			
+			} else {
 				$(this).parent().css({ left: (left + (currentRowIndex*10)) + 'px' });			
 			}
 			$(this).parent().css({ top: top + 'px' });
@@ -51,19 +51,17 @@
 			img.css("width",args.imageWidth);		
 			imageHeights[totalImagesCounter] = img.height();
 
-			if(currentRow > 1){
+			if(currentRow > 1) {
 				var newTop = 0;		
-				for (i=1;i< currentRow;i++)
-				{
+				for(i=1;i< currentRow;i++) {
 					newTop = newTop + imageHeights[totalImagesCounter - (itemsPerRow * i)] + 10;
 				}
 				$(this).parent().css({ top: newTop + 'px' });
-				if((newTop + img.height()) > containerHeight){
+				if((newTop + img.height()) > containerHeight) {
 					containerHeight = newTop + img.height();				
 				}
 			}
-			switch(args.slideEffect)
-			{
+			switch(args.slideEffect) {
 				case "slideDown":
 					$(this).parent().hide().slideDown(totalImagesCounter*100);
 					break;
@@ -73,8 +71,8 @@
 			}			
 			container.height(containerHeight);
 		});
-		$(window).resize(function(){
-			if((container.width() > (lastContainerWidth + args.imageWidth)) || container.width() < (lastContainerWidth - args.imageWidth)){				
+		$(window).resize(function() {
+			if((container.width() > (lastContainerWidth + args.imageWidth)) || container.width() < (lastContainerWidth - args.imageWidth)) {
 				container.imagetiles({imageWidth:args.imageWidth, slideEffect:args.slideEffect});
 			}	
 		});
